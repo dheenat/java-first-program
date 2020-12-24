@@ -8,9 +8,9 @@ public static Map<Integer, Float> bestRates  = Map.of(1, 5.50f, 2, 3.45f, 3, 2.6
 
     public static void main(String... args){
         Scanner scanner = new Scanner(System.in);
-        System.out.print(" Enter your name: ");
+        System.out.print(" Enter your name");
         String name = scanner.nextLine();
-        System.out.println("  Hello  " + name );
+        System.out.println("Hello" + name );
 
         System.out.println( "Enter the loan term (in years)" ) ;
         int loanTermInYears  = scanner.nextInt();
@@ -18,13 +18,14 @@ public static Map<Integer, Float> bestRates  = Map.of(1, 5.50f, 2, 3.45f, 3, 2.6
         if (bestRate==0.0f)
         System.out.println("No available rates for term: " + loanTermInYears + " years"  ) ;
        else
-            System.out.println(    "Best Available Rate: " + getRates(loanTermInYears) + "%");
+            System.out.println("Best Available Rate: " + getRates(loanTermInYears) + "%");
 
        scanner.close();
     }
 
     public static float getRates(int loanTermInYears ){
-        return 0.0f ;
-        //bestRates.get(loanTermInYears);
+     //   if (  bestRates.containsKey(loanTermInYears)  )
+            return bestRates.getOrDefault(loanTermInYears,0.0f);
+       // else return 0.0f;
     }
 }

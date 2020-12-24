@@ -16,7 +16,7 @@ public class App
     }
 
 
-    public static int add(int[] numbers) {
+    private static int add(int[] numbers) {
         int sum = 0 ;
         for( int  number : numbers){
             sum+=number;
