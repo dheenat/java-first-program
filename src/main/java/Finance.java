@@ -20,12 +20,17 @@ public class Finance
     {
         String command = args[0];
 
-        if( !  commandsToUsage.containsKey(command) )
+        if( !  commandsToUsage.containsKey(command) ) {
             System.out.println(command + ": command not found");
+            return ;
+        }
+        boolean isValidationCommand=    validateCommandArguments(args);
 
-        boolean validationStatus =    validateCommandArguments(args);
+        if(!isValidationCommand) {
+            System.out.println(commandsToUsage.get(args[0]));
+            return;
+        }
 
-        if (validationStatus )
             executeCommand(commandsToUsage.get(command), Arrays.copyOfRange(args,1, args.length));
 
     }
@@ -34,11 +39,11 @@ public class Finance
         String appName = args[0];
         switch (appName){
             case BEST_LOAN_RATES:
-                return args.length == 1 ? true:false;
+                return args.length == 1 ;
             case SAVINGS_CALCULATOR:
-                return args.length == 3 ? true:false;
+                return args.length == 3 ;
             case MORTGAGE_CALCULATOR:
-                return args.length == 4 ? true:false;
+                return args.length == 4 ;
             default:
                 return  false;
         }
