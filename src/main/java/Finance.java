@@ -18,10 +18,15 @@ public class Finance
 
     public static void main( String[] args )
     {
+        String command = args[0];
+
+        if( !  commandsToUsage.containsKey(command) )
+            System.out.println(command + ": command not found");
+
         boolean validationStatus =    validateCommandArguments(args);
 
         if (validationStatus )
-            executeCommand(commandsToUsage.get(args[0]), Arrays.copyOfRange(args,1, args.length));
+            executeCommand(commandsToUsage.get(command), Arrays.copyOfRange(args,1, args.length));
 
     }
 
