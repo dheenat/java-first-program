@@ -1,8 +1,11 @@
 package com.h2;
 
+import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.function.Try;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -171,6 +174,27 @@ public class Module6_Test {
             Throwable targetException = exception.getTargetException();
             assertEquals(IllegalArgumentException.class, targetException.getClass(), methodName + " should have thrown an instance of 'IllegalArgumentException'");
             assertEquals(input + " cannot be converted into a 'float' value. Exiting program.", targetException.getMessage());
+        }
+        {
+
+            try {
+                ByteArrayOutputStream testOut = new ByteArrayOutputStream();
+                System.setOut(new PrintStream(testOut));;
+                method.invoke(null, (Object) new String[]{ loanAmount, termInYears, annualRate});
+                List<String> consoleOutputs = Arrays.asList(testOut.toString().split("\n"));
+
+                assertEquals(1, consoleOutputs.size(), "For case MORTGAGE_CALCULATOR, " + methodName + " should print 1 statement on the console.");
+                assertEquals("monthlyPayment: 1221.14", consoleOutputs.get(0).trim());
+
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            finally {
+            System.setOut(System.out);
+        }
+
         }
     }
 }
